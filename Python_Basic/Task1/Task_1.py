@@ -1,6 +1,7 @@
 from random import randint                                 #random library
 
 #variables
+N = 100
 data_list = []
 new_list = []
 sum_cht = 0
@@ -11,10 +12,8 @@ count_cht = 0
 count_ncht = 0
 
 #creatint list of 100 random numbers from 0 to 1000
-while len(data_list) < 100:                                 #perform until it reaches the list of 100
-    rand_num = randint(0, 1000)                             #random numbers and range
-    if rand_num not in data_list:                           #condition for writing random number
-        data_list.append(rand_num)                          #writing random number.
+for i in range(N):
+    data_list.append(randint(0, 1000))                      #writing random number.
 
 #sort list from min to max
 while data_list:                                            #execute while there is numbers in the list
@@ -27,7 +26,7 @@ while data_list:                                            #execute while there
 
 #calculating average for even and odd numbers
 for i in new_list:                                          #take the value from the list with zero key and then next keys
-    if i % 2 == 0:                                        #condition for finding even and odd numbers
+    if i % 2 == 0:                                          #condition for finding even and odd numbers
         sum_cht += i                                        #summ of found even numbers
         count_cht += 1                                      #count of even numbers
     else:

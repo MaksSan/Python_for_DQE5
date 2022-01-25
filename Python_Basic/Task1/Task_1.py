@@ -27,9 +27,7 @@ while data_list:                                            #execute while there
 
 #calculating average for even and odd numbers
 for i in new_list:                                          #take the value from the list with zero key and then next keys
-    if i == 0:                                              #check on the zero value in the list
-        pass
-    elif i % 2 == 0:                                        #condition for finding even and odd numbers
+    if i % 2 == 0:                                        #condition for finding even and odd numbers
         sum_cht += i                                        #summ of found even numbers
         count_cht += 1                                      #count of even numbers
     else:

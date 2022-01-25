@@ -3,6 +3,7 @@ from random import randint                                 #random library
 #variables
 N = 100
 data_list = []
+new_list = []
 sum_cht = 0
 sum_ncht = 0
 avg_cht = 0

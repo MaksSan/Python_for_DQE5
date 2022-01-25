@@ -26,17 +26,17 @@ while data_list:                                            #execute while there
     data_list.remove(minimum)                               #found value is removed from the first list (data_list)
 
 #calculating average for even and odd numbers
-for i in new_list:                                         #take the value from the list with zero key and then next keys
-    if i == 0:                                             #check on the zero value in the list
+for i in new_list:                                          #take the value from the list with zero key and then next keys
+    if i == 0:                                              #check on the zero value in the list
         pass
-    elif i % 2 == 0:                                       #condition for finding even and odd numbers
-        sum_cht += i                                       #summ of found even numbers
-        count_cht += 1                                     #count of even numbers
+    elif i % 2 == 0:                                        #condition for finding even and odd numbers
+        sum_cht += i                                        #summ of found even numbers
+        count_cht += 1                                      #count of even numbers
     else:
-        sum_ncht += i                                      #summ of found odd numbers
-        count_ncht += 1                                    #count of odd numbers
-avg_cht = sum_cht/count_cht                                #calculating the average value for even numbers
-avg_ncht = sum_ncht/count_ncht                             #calculating the average value for odd numbers
+        sum_ncht += i                                       #summ of found odd numbers
+        count_ncht += 1                                     #count of odd numbers
+avg_cht = sum_cht/count_cht                                 #calculating the average value for even numbers
+avg_ncht = sum_ncht/count_ncht                              #calculating the average value for odd numbers
 
 print("List of values: " + str(new_list))
 print("Average value for even numbers: " + str(avg_cht))

@@ -33,7 +33,7 @@ for i in new_list:                                          #take the value from
     else:
         sum_ncht += i                                       #summ of found odd numbers
         count_ncht += 1                                     #count of odd numbers
-try:
+try:                                                        #checking for error
     avg_cht = sum_cht/count_cht                             #calculating the average value for even numbers
     avg_ncht = sum_ncht/count_ncht                          #calculating the average value for odd numbers
 except ZeroDivisionError:

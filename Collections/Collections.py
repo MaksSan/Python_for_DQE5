@@ -8,7 +8,7 @@ tempr_dict = {}
 #creating random dictionary
 rand_dict = [{choice(ascii_lowercase): randint(0, 100) for i in range(len(ascii_lowercase))} for j in range(randint(2, 10))]
 
-#searching all values for one key
+#searching all values for each one key
 for dictionary in rand_dict:                                                    #take the key and value from the dict
     for k, v in dictionary.items():                                             #divide it into key and value
         tempr_dict.setdefault(k, []).append(v)                                  #assigning key values

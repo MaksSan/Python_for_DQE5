@@ -20,7 +20,7 @@ for k, v in tempr_dict.items():                                                 
     else:
         my_dict[k] = v[0]                                                       #assigns a value to a key with a zero key
 
-print("Random dictionary: " + str(rand_dict))                                     #printing the random dictionary
+print("Random dictionary: " + str(rand_dict))                                   #printing the random dictionary
 print("Result: " + str(my_dict))                                                #printing the result
 
 

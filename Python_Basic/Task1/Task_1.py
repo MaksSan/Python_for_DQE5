@@ -40,6 +40,6 @@ except ZeroDivisionError:
     print("ERROR: Division by zero")
 
 
-print("List of values: " + str(new_list))
-print("Average value for even numbers: " + str(avg_cht))
-print("Average value for odd numbers: " + str(avg_ncht))
+print("List of values: " + str(new_list))                   #printing the list of values
+print("Average value for even numbers: " + str(avg_cht))    #printing average value for even numbers
+print("Average value for odd numbers: " + str(avg_ncht))    #printing average value for odd numbers

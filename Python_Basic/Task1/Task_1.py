@@ -36,8 +36,8 @@ for i in new_list:                                          #take the value from
 try:                                                        #checking for error
     avg_cht = sum_cht/count_cht                             #calculating the average value for even numbers
     avg_ncht = sum_ncht/count_ncht                          #calculating the average value for odd numbers
-except ZeroDivisionError:
-    print("ERROR: Division by zero")
+except ZeroDivisionError:                                   #expected exception
+    print("ERROR: Division by zero")                        #printing text error
 
 
 print("List of values: " + str(new_list))                   #printing the list of values

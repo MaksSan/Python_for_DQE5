@@ -11,7 +11,7 @@ rand_dict = [{choice(ascii_lowercase): randint(0, 100) for i in range(len(ascii_
 #searching all values for each one key
 for dictionary in rand_dict:                                                    #take the key and value from the dict
     for k, v in dictionary.items():                                             #divide it into key and value
-        tempr_dict.setdefault(k, []).append(v)                                  #assigning key values
+        tempr_dict.setdefault(k, []).append(v)                                  #assigning key values and adding
 
 #searching the biggest values for key
 for k, v in tempr_dict.items():                                                 #take the key value from the dict

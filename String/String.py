@@ -16,7 +16,7 @@ for c in original_text:
     if c in {' ', '\n', '\t'}:
         num_whitespace += 1
 
-replaced_text = original_text.lower().replace(' iz ', ' is ').replace('\t', '').replace('\t', '').replace('\n', '')
+replaced_text = original_text.lower().replace(' iz ', ' is ').replace('\t', '').replace('\n', '')
 
 for x in replaced_text.split('.'):
     some_variable.append(x)

@@ -37,9 +37,9 @@ try:                                                        #checking for error
     avg_cht = sum_cht/count_cht                             #calculating the average value for even numbers
     avg_ncht = sum_ncht/count_ncht                          #calculating the average value for odd numbers
 except ZeroDivisionError:                                   #expected exception
-    print("ERROR: Division by zero")                        #printing text error
+    print(f'ERROR: Division by zero')                       #printing text error
 
 
-print("List of values: " + str(new_list))                   #printing the list of values
-print("Average value for even numbers: " + str(avg_cht))    #printing average value for even numbers
-print("Average value for odd numbers: " + str(avg_ncht))    #printing average value for odd numbers
+print(f'List of values: {new_list}')                        #printing the list of values
+print(f'Average value for even numbers: {avg_cht}')         #printing average value for even numbers
+print(f'Average value for odd numbers: {avg_ncht}')         #printing average value for odd numbers

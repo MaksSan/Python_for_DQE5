@@ -1,4 +1,3 @@
-import re
 original_text = '''homEwork:
 	tHis iz your homeWork, copy these Text to variable. 
 
@@ -11,7 +10,6 @@ original_text = '''homEwork:
 num_whitespace = 0
 general_text = list()
 collected_sentence = list()
-new_text2 = list()
 
 for c in original_text:                                                                                                 #counting the number of all whitespaces
     if c in {' ', '\n', '\t'}:

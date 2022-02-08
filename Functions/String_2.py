@@ -31,11 +31,6 @@ def general_text():
     return gt
 
 
-def collect_general_text():
-    coll_gen_text = '. \n'.join(general_text())
-    return coll_gen_text
-
-
 def sentence_last_words():
     slw = list()
     for x in general_text():

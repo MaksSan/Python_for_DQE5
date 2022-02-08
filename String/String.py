@@ -1,3 +1,4 @@
+import re
 original_text = '''homEwork:
 	tHis iz your homeWork, copy these Text to variable. 
 
@@ -10,6 +11,7 @@ original_text = '''homEwork:
 num_whitespace = 0
 general_text = list()
 collected_sentence = list()
+new_text2 = list()
 
 for c in original_text:                                                                                                 #counting the number of all whitespaces
     if c in {' ', '\n', '\t'}:
@@ -18,16 +20,21 @@ for c in original_text:                                                         
 replaced_text = original_text.lower().replace(' iz ', ' is ').replace('\t', '').replace('\n', '')                       #replacements
 
 try:                                                                                                                    #checking for error
-    for x in replaced_text.split('. '):                                                                                 #splitting all text by dot
+    for x in replaced_text.split('.'):                                                                                  #splitting all text by dot
         if len(x) > 0:                                                                                                  #condition for not zero leng
             general_text.append(x.strip().capitalize())                                                                 #adding sentences/removing spaces at the begin/capital letler for fIrst words
             collected_sentence.append(x.split()[-1])                                                                    #creating sentence with last words of each existing sentence
 except IndexError:                                                                                                      #expected exception
     print(f'Index is out of range')                                                                                     #printing text error
 
-new_text = '. \n'.join(general_text) + '\n' + ' '.join(collected_sentence).capitalize()                                 #joining general text with sentence from last words
+general_text = '. \n'.join(general_text)                                                                                #creating general text
+collected_sentence = ' '.join(collected_sentence).capitalize()                                                          #creating text from last words
 
-print(f'Normalized text: \n{new_text}')
+general_text = general_text.split('. ')                                                                                 #splitting general text for finding paragraph
+general_text.insert(3, '\n' + collected_sentence)                                                                       #adding sentens from last words after the sentens
+new_text = '. '.join(general_text)                                                                                      #creating the entire text
+
+print(f'Normalized text: \n{new_text}.')
 print(f'\n=================================')
 print(f'Numbers of whitespaces: {num_whitespace}')
 print(f'=================================')

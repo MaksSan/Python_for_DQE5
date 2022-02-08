@@ -52,10 +52,11 @@ except IndexError:
 
 
 def finish_text():
-    nt = collect_general_text().split('. ')
-    nt.insert(3, '\n' + sentence_last_words())
-    new_text = '. '.join(nt)
+    nt = general_text()
+    nt.insert(3, sentence_last_words())
+    new_text = '. \n'.join(nt)
     return new_text
+
 
 print(f'Normalized text: \n{finish_text()}.')
 print(f'\n=================================')

@@ -29,10 +29,10 @@ class News(Message):
 
     def write_to_file(self, _filename):
         with open(_filename, "a+") as _file:
-            _file.write(self.text + "\n" + self.city + ", " + str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n\n\n\n")
+            _file.write("NEWS----------------------" + "\n" + self.text + "\n" + self.city + ", " + str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n\n\n\n")
 
 
-class Advert(Message):
+class Advertisement(Message):
 
     def __init__(self, text, days_count):
         super().__init__(text)
@@ -54,7 +54,7 @@ class Advert(Message):
 
     def write_to_file(self, _filename):
         with open(_filename, "a+") as _file:
-            _file.write(self.text + "\n" + "Actual until: " + self.get_date() + " " + self.get_days_count() + " days left" "\n\n\n\n")
+            _file.write("Advertisement------------------------" + "\n" + self.text + "\n" + "Actual until: " + self.get_date() + " " + self.get_days_count() + " days left" "\n\n\n\n")
 
 
 class Vacancy(Message):
@@ -68,11 +68,11 @@ class Vacancy(Message):
 
     def write_to_file(self, _filename):
         with open(_filename, "a+") as _file:
-            _file.write(self.text + "\n" + self.city + ", " + str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n\n\n\n")
+            _file.write("Vacancy-----------------" + "\n" + self.text + "\n" + self.city + ", " + str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n\n\n\n")
 
 
 def show_menu():
-    print("Menu" + "\n" + "1 - Add news" + "\n" + "2 - Add advertisment" + "\n" + "3 - Add vacancy" + "\n" + "4 - Exit" + "\n" + "\n")
+    print("Menu" + "\n" + "1 - Add news" + "\n" + "2 - Add advertisement" + "\n" + "3 - Add vacancy" + "\n" + "4 - Exit" + "\n" + "\n")
 
 
 def create_message_input():
@@ -98,7 +98,7 @@ def input_text():
         elif cmd == "2":
             print("2 was selected" + "\n")
             days_count = input("Input days count: ")
-            _mess = Advert(create_message_input(), days_count)
+            _mess = Advertisement(create_message_input(), days_count)
             _mess.write_to_file(file_name)
             break
         elif cmd == "3":

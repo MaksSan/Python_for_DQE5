@@ -62,8 +62,8 @@ class Vacancy(Message):                                                         
     def get_city(self):                                                                                                 #function for getting the city
         return self.city
 
-    def write_to_file(self, file_name):                                                                                #function for writing text into the file
-        with open(file_name, "a+") as _file:                                                                           #open at the end on the file
+    def write_to_file(self, file_name):                                                                                 #function for writing text into the file
+        with open(file_name, "a+") as _file:                                                                            #open at the end on the file
             _file.write("Vacancy--------------------" + "\n" + self.text + "\n" + self.city + ", " +
                         str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n\n\n\n")                        #write text and date into the file
 

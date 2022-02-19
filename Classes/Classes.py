@@ -111,5 +111,4 @@ def main():                                                                     
     input_text()
 
 
-main()                                                                                                                  #launching the programm
-
+main()                                                                                                                  #launching the function "main"

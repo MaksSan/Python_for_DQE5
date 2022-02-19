@@ -3,12 +3,12 @@ import datetime
 file_name = "file.txt"
 
 
-class Message:                                                                                                          #class for writing message to file
+class Message:                                                                                                          #class for using Inheritance
 
     def __init__(self, text):                                                                                           #function for initialization varibels
         self.text = text
 
-    def gettext(self):                                                                                                  #function for getting text from file
+    def gettext(self):                                                                                                  #function for getting inputed text
         return self.text
 
 
@@ -23,7 +23,7 @@ class News(Message):                                                            
 
     def write_to_file(self, _file_name):                                                                                #function for writing text into the file
         with open(_file_name, "a+") as _file:                                                                           #open at the end on the file
-            _file.write("NEWS-----------------------" + "\n" + self.text + "\n" + self.city + ", " +
+            _file.write("NEWS----------------------" + "\n" + self.text + "\n" + self.city + ", " +
                         str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n\n\n\n")                        #write text and date into the file
 
 
@@ -77,38 +77,38 @@ def create_message_input():                                                     
     return input("Input text: ")
 
 
-def main():                                                                                                             #function for working with file and print the menu
-    my_file = open(file_name)
-    my_file.close()
-    show_menu()
-    input_text()
-
-
 def input_text():                                                                                                       #Main function for adding data
     cmd = input("Input command: ")                                                                                      #input command
     while cmd != "4":                                                                                                   #cycle for selecting menu
         if cmd == "1":                                                                                                  #condition for adding news
             print("1 was selected" + "\n")
-            _city = input("Input the city: ")
-            _mess = News(create_message_input(), _city)
-            _mess.write_to_file(file_name)
+            city = input("Input the city: ")
+            mess = News(create_message_input(), city)
+            mess.write_to_file(file_name)
             break
         elif cmd == "2":                                                                                                #condition for addin Advertisements
             print("2 was selected" + "\n")
             days_count = input("Input days count: ")
-            _mess = Advertisement(create_message_input(), days_count)
-            _mess.write_to_file(file_name)
+            mess = Advertisement(create_message_input(), days_count)
+            mess.write_to_file(file_name)
             break
         elif cmd == "3":                                                                                                #condition for addin vacancy
             print("3 was selected" + "\n")
-            _city = input("Input the city: ")
-            _mess = Vacancy(create_message_input(), _city)
-            _mess.write_to_file(file_name)
+            city = input("Input the city: ")
+            mess = Vacancy(create_message_input(), city)
+            mess.write_to_file(file_name)
             break
         else:                                                                                                           #if the nothing entered
             print("There is no such command!" + "\n")
             break
     return
+
+
+def main():                                                                                                             #function for working with file and print the menu
+    my_file = open(file_name)
+    my_file.close()
+    show_menu()
+    input_text()
 
 
 main()                                                                                                                  #launching the programm

@@ -47,8 +47,8 @@ class Advertisement(Message):                                                   
 
         return another_time.strftime(date_format)
 
-    def write_to_file(self, file_name):                                                                                #function for writing text into the file
-        with open(file_name, "a+") as _file:                                                                           #open at the end on the file
+    def write_to_file(self, file_name):                                                                                 #function for writing text into the file
+        with open(file_name, "a+") as _file:                                                                            #open at the end on the file
             _file.write("Advertisement------------------------" + "\n" + self.text + "\n" + "Actual until: " +
                         self.get_date() + " " + self.get_days_count() + " days left" "\n\n\n\n")                        #write text and date into the file
 

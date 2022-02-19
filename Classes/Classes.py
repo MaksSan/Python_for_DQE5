@@ -21,8 +21,8 @@ class News(Message):                                                            
     def get_city(self):                                                                                                 #function for getting the city
         return self.city
 
-    def write_to_file(self, _file_name):                                                                                #function for writing text into the file
-        with open(_file_name, "a+") as _file:                                                                           #open at the end on the file
+    def write_to_file(self, file_name):                                                                                #function for writing text into the file
+        with open(file_name, "a+") as _file:                                                                           #open at the end on the file
             _file.write("NEWS----------------------" + "\n" + self.text + "\n" + self.city + ", " +
                         str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n\n\n\n")                        #write text and date into the file
 
@@ -47,8 +47,8 @@ class Advertisement(Message):                                                   
 
         return another_time.strftime(date_format)
 
-    def write_to_file(self, _file_name):                                                                                #function for writing text into the file
-        with open(_file_name, "a+") as _file:                                                                           #open at the end on the file
+    def write_to_file(self, file_name):                                                                                #function for writing text into the file
+        with open(file_name, "a+") as _file:                                                                           #open at the end on the file
             _file.write("Advertisement------------------------" + "\n" + self.text + "\n" + "Actual until: " +
                         self.get_date() + " " + self.get_days_count() + " days left" "\n\n\n\n")                        #write text and date into the file
 
@@ -62,8 +62,8 @@ class Vacancy(Message):                                                         
     def get_city(self):                                                                                                 #function for getting the city
         return self.city
 
-    def write_to_file(self, _file_name):                                                                                #function for writing text into the file
-        with open(_file_name, "a+") as _file:                                                                           #open at the end on the file
+    def write_to_file(self, file_name):                                                                                #function for writing text into the file
+        with open(file_name, "a+") as _file:                                                                           #open at the end on the file
             _file.write("Vacancy--------------------" + "\n" + self.text + "\n" + self.city + ", " +
                         str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n\n\n\n")                        #write text and date into the file
 
@@ -82,21 +82,21 @@ def input_text():                                                               
     while cmd != "4":                                                                                                   #cycle for selecting menu
         if cmd == "1":                                                                                                  #condition for adding news
             print("1 was selected" + "\n")
-            city = input("Input the city: ")
+            city = input("Input the city: ")                                                                            #input city
             mess = News(create_message_input(), city)
-            mess.write_to_file(file_name)
+            mess.write_to_file(file_name)                                                                               #using function for writing from class
             break
         elif cmd == "2":                                                                                                #condition for addin Advertisements
             print("2 was selected" + "\n")
-            days_count = input("Input days count: ")
+            days_count = input("Input days count: ")                                                                    #input days count
             mess = Advertisement(create_message_input(), days_count)
-            mess.write_to_file(file_name)
+            mess.write_to_file(file_name)                                                                               #using function for writing from class
             break
         elif cmd == "3":                                                                                                #condition for addin vacancy
             print("3 was selected" + "\n")
-            city = input("Input the city: ")
+            city = input("Input the city: ")                                                                            #input city
             mess = Vacancy(create_message_input(), city)
-            mess.write_to_file(file_name)
+            mess.write_to_file(file_name)                                                                               #using function for writing from class
             break
         else:                                                                                                           #if the nothing entered
             print("There is no such command!" + "\n")

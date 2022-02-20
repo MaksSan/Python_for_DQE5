@@ -53,12 +53,13 @@ class Advertisement(Message):                                                   
                         self.get_date() + " " + self.get_days_count() + " days left" "\n\n\n\n")                        #write text and date into the file
 
 
-class Vacancy(Message):                                                                                                #class for writing Advertisement
+class Vacancy(Message):                                                                                                 #class for writing Advertisement
 
-    def __init__(self, text, salary, city):                                                                             #function for initialization varibels
+    def __init__(self, text, salary, city, position):                                                                   #function for initialization varibels
         super().__init__(text)
         self.city = city
         self.salary = salary
+        self.position = position
 
     def get_city(self):                                                                                                 #function for getting the city
         return self.city
@@ -68,9 +69,9 @@ class Vacancy(Message):                                                         
 
     def write_to_file(self, file_name):                                                                                 #function for writing text into the file
         with open(file_name, "a+") as file:                                                                             #open at the end on the file
-            file.write("Vacancy--------------------" + "\n" + self.text + "\n" + "Salary: " + self.get_salary() + "$" +
-                       "\n" + self.get_city() + ", " + str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) +
-                       "\n\n\n\n")                                                                                      #write text and date into the file
+            file.write("Vacancy--------------------" + "\n" + "Position: " + self.position + "\n" + self.text + "\n" +
+                       "Salary: " + self.get_salary() + "$" + "\n" + self.get_city() + ", " +
+                       str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n\n\n\n")                         #write text and date into the file
 
 
 def show_menu():                                                                                                        #function for printing menu
@@ -89,10 +90,18 @@ def parse_str(s, base=10, val=None):                                            
         return val
 
 
-def input_format():                                                                                                     #checking the input format
+def digital_input_format():                                                                                             #checking the input format
     x = input()
     while type(parse_str(x)) != int or int(x) <= 0:
         print('Incorrect input format or type, try again!')
+        x = input("Try again: ")
+    return x
+
+
+def letter_input_format():                                                                                              #checking the input format
+    x = input()
+    while not x.isalpha():
+        print('Incorrect input format or type, only letter can be used!')
         x = input("Try again: ")
     return x
 
@@ -105,21 +114,25 @@ def input_text():                                                               
                 cmd = input("Enter the number of the menu item: ")
                 if cmd == "1":                                                                                          #condition for adding news
                     print("1 was selected" + "\n")
-                    city = input("Enter the city: ")                                                                    #input city
+                    print("Enter the city: ")                                                                           #input city
+                    city = letter_input_format()
                     mess = News(create_message_input(), city)
                     mess.write_to_file(file_name)                                                                       #using function for writing from class
                 elif cmd == "2":                                                                                        #condition for addin Advertisements
                     print("2 was selected" + "\n")
                     print("Enter days count: ")                                                                         #input days count
-                    days_count = input_format()
+                    days_count = digital_input_format()
                     mess = Advertisement(create_message_input(), days_count)
                     mess.write_to_file(file_name)                                                                       #using function for writing from class
                 elif cmd == "3":                                                                                        #condition for addin vacancy
                     print("3 was selected" + "\n")
-                    print("Enter salary: ")
-                    salary = input_format()
-                    city = input("Enter the city: ")                                                                    #input city
-                    mess = Vacancy(create_message_input(), salary, city)
+                    print("Enter the city: ")                                                                           #input city
+                    city = letter_input_format()
+                    print("Enter the position: ")
+                    position = input()
+                    print('Enter salary: ')
+                    salary = digital_input_format()
+                    mess = Vacancy(create_message_input(), salary, city, position)
                     mess.write_to_file(file_name)                                                                       #using function for writing from class
                 elif cmd == "4":
                     print('You have exited the add event menu!')

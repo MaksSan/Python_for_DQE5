@@ -149,11 +149,8 @@ def input_text():                                                               
     return
 
 
-def main():                                                                                                             #function for working with file and print the menu
+if __name__ == '__main__':                                                                                              #launching the "main"
     my_file = open(file_name)
     my_file.close()
     show_menu()
     input_text()
-
-
-main()                                                                                                                  #launching the function "main"

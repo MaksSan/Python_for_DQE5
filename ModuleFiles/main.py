@@ -126,7 +126,7 @@ def input_text():                                                               
                     writing_to_file(file_name, normalize(get_text_from_file(directory)))
                     print("The data from the file was successfully recorded")
                     path = os.path.join(os.path.abspath(os.path.dirname(directory)), 'input_text.txt')                  #finding location for file
-                    os.remove(path)                                                                                 #remove the file from folder
+                    os.remove(path)                                                                                     #remove the file from folder
                     if os.path.isfile(directory):                                                                       #checking for the existence of a file
                         print("File not deleted")
                     else:

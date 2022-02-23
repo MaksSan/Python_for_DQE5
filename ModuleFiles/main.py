@@ -1,9 +1,10 @@
+import os
+import sys
 from classes import News
 from classes import Advertisement
 from classes import Vacancy
 
 file_name = "Processed_file/file.txt"
-input_file = "Input_file/input_text.txt"
 
 
 def show_menu():                                                                                                        #function for printing menu
@@ -39,9 +40,13 @@ def letter_input_format():                                                      
 
 
 def get_text_from_file(input_file):                                                                                     #function for get input file
-    with open(input_file, 'r') as file:
-        text = file.read()
-    return text
+    try:
+        with open(input_file, 'r') as file:
+            text = file.read()
+        return text
+    except FileNotFoundError:
+        print('The file not exist!')
+        sys.exit()
 
 
 def normalize(text):                                                                                                    #function for normalization of file
@@ -65,6 +70,26 @@ def writing_to_file(file_name, text):                                           
     with open(file_name, "a+") as file:
         file.write(text)
     return file
+
+
+def get_directory():                                                                                                    #enter directory
+    global directory
+    print("File Selection menu" + "\n" + "1 - Enter path to file manually" + "\n"
+          + '2 - File uploaded into "Input_file" folder' + "\n")
+    while "2":
+        cmd = input('Enter the menu item: ')
+        if cmd == '1':
+            directory = input('Enter the directory for file: ')
+            while not os.path.exists(directory):
+                print('File not found!')
+                directory = input('Please try again: ')
+            break
+        elif cmd == '2':
+            directory = "Input_file/input_text.txt"
+            break
+        else:                                                                                                           #if the nothing entered
+            print("There is no such command!" + "\n")
+    return directory
 
 
 def input_text():                                                                                                       #main function for adding data
@@ -97,11 +122,15 @@ def input_text():                                                               
                     mess.write_to_file(file_name)                                                                       #using function for writing from class
                 elif cmd == "4":
                     print("4 was selected" + "\n")
-                    try:
-                        writing_to_file(file_name, normalize(get_text_from_file(input_file)))
-                    except IndexError:
-                        print(f'Index is out of range')
+                    directory = get_directory()
+                    writing_to_file(file_name, normalize(get_text_from_file(directory)))
                     print("The data from the file was successfully recorded")
+                    path = os.path.join(os.path.abspath(os.path.dirname(directory)), 'input_text.txt')                  #finding location for file
+                    os.remove(path)                                                                                 #remove the file from folder
+                    if os.path.isfile(directory):                                                                       #checking for the existence of a file
+                        print("File not deleted")
+                    else:
+                        print('File was delete successfully')
                 elif cmd == "5":
                     print('You have exited the add event menu!')
                     break
@@ -117,8 +146,8 @@ def input_text():                                                               
     return
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':                                                                                              #launching the "main"
     my_file = open(file_name)
     my_file.close()
     show_menu()
-    input_text()                                                                                                        #launching the function "main"
+    input_text()

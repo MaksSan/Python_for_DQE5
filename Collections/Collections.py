@@ -5,7 +5,7 @@ from string import ascii_lowercase                                              
 my_dict = {}
 tempr_dict = {}
 
-#creating random dictionaryy
+#creating random dictionary
 rand_dict = [{choice(ascii_lowercase): randint(0, 100) for i in range(len(ascii_lowercase))} for j in range(randint(2, 10))]
 
 #searching all values for each one key

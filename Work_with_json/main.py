@@ -1,6 +1,7 @@
 import os
 import sys
 import csv
+import json
 from classes import News
 from classes import Advertisement
 from classes import Vacancy
@@ -10,7 +11,7 @@ file_name = "Processed_file/file.txt"
 
 def show_menu():                                                                                                        #function for printing menu
     print("Menu" + "\n" + "1 - Add news" + "\n" + "2 - Add advertisement" + "\n" + "3 - Add vacancy" + "\n" +
-          "4 - Add text from input file" + "\n" + "5 - Exit" + "\n" + "\n")
+          "4 - Add text from input file" + "\n" + "5 - Add text from JSON input file" + "\n" + "6 - Exit" + "\n" + "\n")
 
 
 def create_message_input():                                                                                             #function for input the text
@@ -75,9 +76,11 @@ def writing_to_file(file_name, text):                                           
 
 def get_directory():                                                                                                    #enter directory
     global directory
-    print("File Selection menu" + "\n" + "1 - Enter path to file manually" + "\n"
-          + '2 - File uploaded into "Input_file" folder' + "\n")
-    while "2":
+    print("File Selection menu" + "\n"
+          + "1 - Enter path to file manually" + "\n"
+          + '2 - TXT File uploaded into "Input_file" folder' + "\n"
+          + '3 - JSON File uploaded into "Input_file" folder' + "\n")
+    while "3":
         cmd = input('Enter the menu item: ')
         if cmd == '1':
             directory = input('Enter the directory for file: ')
@@ -87,6 +90,9 @@ def get_directory():                                                            
             break
         elif cmd == '2':
             directory = "Input_file/input_text.txt"
+            break
+        elif cmd == '3':
+            directory = "Input_file/input_text.json"
             break
         else:                                                                                                           #if the nothing entered
             print("There is no such command!" + "\n")
@@ -159,6 +165,41 @@ def writing_to_csv2():                                                          
                 str(get_count_uppercase(i, text)), 'percentage': str(round(get_letter_percentage(i, text), 2)) + '%'})
 
 
+def get_text_from_json_file(input_file):
+    try:
+        with open(input_file) as json_file:
+            data = json.load(json_file)
+        return data
+    except FileNotFoundError:
+        print('The file not exist!')
+        sys.exit()
+
+
+def get_news(data):
+    text = []
+    # x = open_json_file()
+    for i in data['News']:
+        text = ''.join(i["type"] + '\n' + i["text"] + '\n' + i["city"] + ', ' + i["date"] + '\n\n\n')
+    return text
+
+
+def get_vacancy(data):
+    text = []
+    # x = open_json_file()
+    for i in data['Vacancy']:
+        text = ''.join(i["type"] + '\n' + "Position: " + i["position"] + '\n' + "Experience: " + i["experience"] + '\n'
+                       + "Salary: " + i["salary"] + '\n' + i["city"] + ', ' + i["date"] + '\n\n\n')
+    return text
+
+
+def get_advertisement(data):
+    text = []
+    # x = open_json_file()
+    for i in data['Advertisement']:
+        text = ''.join(i["type"] + '\n' + i["text"] + '\n' + "Actual until: " + i["actual_until"] + '\n\n\n')
+    return text
+
+
 def input_text():                                                                                                       #main function for adding data
     while "N":
         cmd = input("Do you want to add an event? (Y/N) ").upper()
@@ -207,6 +248,21 @@ def input_text():                                                               
                     else:
                         print('File was delete successfully')
                 elif cmd == "5":
+                    print("5 was selected" + "\n")
+                    directory = get_directory()
+                    writing_to_file(file_name, get_news(get_text_from_json_file(directory))
+                                    + get_vacancy(get_text_from_json_file(directory))
+                                    + get_advertisement(get_text_from_json_file(directory)))
+                    print("The data from the file was successfully recorded")
+                    path = os.path.join(os.path.abspath(os.path.dirname(directory)), 'input_text.json')
+                    os.remove(path)
+                    writing_to_csv1()
+                    writing_to_csv2()
+                    if os.path.isfile(directory):                                                                       # checking for the existence of a file
+                        print("File not deleted")
+                    else:
+                        print('File was delete successfully')
+                elif cmd == "6":
                     print('You have exited the add event menu!')
                     break
                 else:                                                                                                   #if the nothing entered

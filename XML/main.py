@@ -79,8 +79,9 @@ def get_directory():                                                            
     print("File Selection menu" + "\n"
           + "1 - Enter path to file manually" + "\n"
           + '2 - TXT File uploaded into "Input_file" folder' + "\n"
-          + '3 - JSON File uploaded into "Input_file" folder' + "\n")
-    while "3":
+          + '3 - JSON File uploaded into "Input_file" folder' + "\n"
+          + '4 - XML File uploaded into "Input_file" folder' + "\n")
+    while "4":
         cmd = input('Enter the menu item: ')
         if cmd == '1':
             directory = input('Enter the directory for file: ')

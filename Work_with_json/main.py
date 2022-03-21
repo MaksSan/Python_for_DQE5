@@ -165,7 +165,7 @@ def writing_to_csv2():                                                          
                 str(get_count_uppercase(i, text)), 'percentage': str(round(get_letter_percentage(i, text), 2)) + '%'})
 
 
-def get_text_from_json_file(input_file):
+def get_text_from_json_file(input_file):                                                                                #function for getting text from json file
     try:
         with open(input_file) as json_file:
             data = json.load(json_file)
@@ -175,14 +175,14 @@ def get_text_from_json_file(input_file):
         sys.exit()
 
 
-def get_news(data):
+def get_news(data):                                                                                                     #function for finding 'News" element
     text = []
     for i in data['News']:
         text = ''.join(i["type"] + '\n' + i["text"] + '\n' + i["city"] + ', ' + i["date"] + '\n\n\n')
     return text
 
 
-def get_vacancy(data):
+def get_vacancy(data):                                                                                                  #function for finding 'Vacancy" element
     text = []
     for i in data['Vacancy']:
         text = ''.join(i["type"] + '\n' + "Position: " + i["position"] + '\n' + "Experience: " + i["experience"] + '\n'
@@ -190,7 +190,7 @@ def get_vacancy(data):
     return text
 
 
-def get_advertisement(data):
+def get_advertisement(data):                                                                                            #function for finding 'Advertisment" element
     text = []
     for i in data['Advertisement']:
         text = ''.join(i["type"] + '\n' + i["text"] + '\n' + "Actual until: " + i["actual_until"] + '\n\n\n')

@@ -2,6 +2,7 @@ import os
 import sys
 import csv
 import json
+import xml.etree.ElementTree as ET
 from classes import News
 from classes import Advertisement
 from classes import Vacancy
@@ -10,8 +11,14 @@ file_name = "Processed_file/file.txt"
 
 
 def show_menu():                                                                                                        #function for printing menu
-    print("Menu" + "\n" + "1 - Add news" + "\n" + "2 - Add advertisement" + "\n" + "3 - Add vacancy" + "\n" +
-          "4 - Add text from input file" + "\n" + "5 - Add text from JSON input file" + "\n" + "6 - Exit" + "\n" + "\n")
+    print("Menu" + "\n"
+          + "1 - Add news" + "\n"
+          + "2 - Add advertisement" + "\n"
+          + "3 - Add vacancy" + "\n"
+          + "4 - Add text from input file" + "\n"
+          + "5 - Add text from JSON input file" + "\n"
+          + "6 - Add text from XML input file" + "\n"
+          + "7 - Exit" + "\n" + "\n")
 
 
 def create_message_input():                                                                                             #function for input the text
@@ -198,11 +205,28 @@ def get_advertisement(data):                                                    
     return text
 
 
+def get_xml_file(input_file):                                                                                           #function for getting structure xml file
+    try:
+        root = ET.parse(input_file)
+        return root
+    except FileNotFoundError:
+        print('The file not exist!')
+        sys.exit()
+
+
+def get_text_from_xml(root):                                                                                            #function for getting text from xml
+    text = []
+    for i in root.iter():
+        text.append(i.text)
+    new_text = '\n'.join(text)
+    return new_text
+
+
 def input_text():                                                                                                       #main function for adding data
     while "N":
         cmd = input("Do you want to add an event? (Y/N) ").upper()
         if cmd == "Y":
-            while "5":                                                                                                  #cycle for selecting menu
+            while "6":                                                                                                  #cycle for selecting menu
                 cmd = input("Enter the number of the menu item: ")
                 if cmd == "1":                                                                                          #condition for adding news
                     print("1 was selected" + "\n")
@@ -261,6 +285,19 @@ def input_text():                                                               
                     else:
                         print('File was delete successfully')
                 elif cmd == "6":
+                    print("6 was selected" + "\n")
+                    directory = get_directory()
+                    writing_to_file(file_name, get_text_from_xml(get_xml_file(directory)))
+                    print("The data from the file was successfully recorded")
+                    path = os.path.join(os.path.abspath(os.path.dirname(directory)), 'input_text.xml')
+                    os.remove(path)
+                    writing_to_csv1()
+                    writing_to_csv2()
+                    if os.path.isfile(directory):                                                                       # checking for the existence of a file
+                        print("File not deleted")
+                    else:
+                        print('File was delete successfully')
+                elif cmd == "7":
                     print('You have exited the add event menu!')
                     break
                 else:                                                                                                   #if the nothing entered

@@ -102,6 +102,9 @@ def get_directory():                                                            
         elif cmd == '3':
             directory = "Input_file/input_text.json"
             break
+        elif cmd == '4':
+            directory = "Input_file/input_text.xml"
+            break
         else:                                                                                                           #if the nothing entered
             print("There is no such command!" + "\n")
     return directory

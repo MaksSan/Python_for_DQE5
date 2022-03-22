@@ -1,0 +1,21 @@
+<type_of_actions>
+  <type_of_record name = 'News'>
+    <type>News</type>
+    <text>Test text</text>
+    <city>Minsk</city>
+    <date>28.03.1992</date>
+  </type_of_record>
+  <type_of_record name = 'Advertisement'>
+    <type>Advertisement</type>
+    <text>Free online training, sharing the secrets on… How TV Media Buyers</text>
+    <actual_until>21/03/2022 30 days left</actual_until>
+  </type_of_record>
+  <type_of_record name = 'Vacancy'>
+    <type>Vacancy</type>
+    <position>Senior Developer in Python</position>
+    <experience>5 years</experience>
+    <salary>5000$</salary>
+    <city>London</city>
+    <date>20/02/2022 03:58:16</date>
+  </type_of_record>
+</type_of_actions>

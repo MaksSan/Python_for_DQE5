@@ -64,6 +64,7 @@ class Vacancy(Message):                                                         
         self.city = city
         self.salary = salary
         self.position = position
+        self.date_time = datetime.datetime.now()
 
     def get_city(self):                                                                                                 #function for getting the city
         return self.city
@@ -71,11 +72,17 @@ class Vacancy(Message):                                                         
     def get_salary(self):                                                                                               #function for getting the city
         return self.salary
 
+    def get_datetime(self):
+        return str(self.date_time.strftime('%d/%m/%Y %H:%M:%S'))
+
+    def get_position(self):
+        return self.position
+
     def write_to_file(self, file_name):                                                                                 #function for writing text into the file
         with open(file_name, "a+") as file:                                                                             #open at the end on the file
             file.write("Vacancy" + "\n" + "Position: " + self.position + "\n" + self.text + "\n" +
                        "Salary: " + self.get_salary() + "$" + "\n" + self.get_city() + ", " +
-                       str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n")                               #write text and date into the file
+                       self.get_datetime() + "\n")                                                                      #write text and date into the file
 
 
 class DBManager:
@@ -96,3 +103,34 @@ class DBManager:
             print('Table was successfully created.')
         self.cur.execute(f"INSERT INTO news (type, text, city, date) VALUES ('News', '{text}', '{city}', '{date}')")
         self.conn.commit()
+
+    def write_to_advertisement(self, text, actual_until):
+        with sqlite3.connect(self.connection_string) as self.conn:
+            self.cur = self.conn.cursor()
+            print("Connection to SQLite DB successful")
+        news_table = self.cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='advertisement' ''')
+        if news_table.fetchone()[0] == 1:
+            pass
+        else:
+            self.cur.execute('CREATE TABLE advertisement (type varchar(50), text varchar(250), '
+                             'actual_until varchar(100))')
+            print('Table was successfully created.')
+        self.cur.execute(f"INSERT INTO advertisement (type, text, actual_until) VALUES ('Advertisement', '{text}', "
+                         f"'{actual_until}')")
+        self.conn.commit()
+
+    def write_to_vacancy(self, position, text, salary, city, date):
+        with sqlite3.connect(self.connection_string) as self.conn:
+            self.cur = self.conn.cursor()
+            print("Connection to SQLite DB successful")
+        news_table = self.cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='vacancy' ''')
+        if news_table.fetchone()[0] == 1:
+            pass
+        else:
+            self.cur.execute('CREATE TABLE vacancy (type varchar(50), position varchar(100), text varchar(250), '
+                             'salary varchar(20), city varchar(100), date varchar(100))')
+            print('Table was successfully created.')
+        self.cur.execute(f"INSERT INTO vacancy (type, position, text, salary, city, date) VALUES "
+                         f"('Vacancy', '{position}', '{text}', '{salary}', '{city}', '{date}')")
+        self.conn.commit()
+

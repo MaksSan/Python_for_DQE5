@@ -237,34 +237,72 @@ def input_text():                                                               
                 cmd = input("Enter the number of the menu item: ")
                 if cmd == "1":                                                                                          #condition for adding news
                     print("1 was selected" + "\n")
-                    print("Enter the city: ")                                                                           #input city
-                    city = letter_input_format()
-                    mess = News(create_message_input(), city)
-                    dbmanager = DBManager(connection_string)
-                    dbmanager.write_to_news(mess.gettext(), mess.get_city(), mess.get_datetime())
-                    # mess.write_to_file(file_name)                                                                     #using function for writing from class
-                    # writing_to_csv1()
-                    # writing_to_csv2()
+                    print("Choose the recording method" + "\n"
+                          + "1 - Recording into the TXT file" + "\n"
+                          + '2 - Recording into the Data Base' + "\n")
+                    cmd = input('Enter the menu item: ')
+                    if cmd == '1':
+                        print("Enter the city: ")                                                                       #input city
+                        city = letter_input_format()
+                        mess = News(create_message_input(), city)
+                        mess.write_to_file(file_name)                                                                   #using function for writing from class
+                        writing_to_csv1()
+                        writing_to_csv2()
+                    else:
+                        print("Enter the city: ")                                                                       # input city
+                        city = letter_input_format()
+                        mess = News(create_message_input(), city)
+                        dbmanager = DBManager(connection_string)
+                        dbmanager.write_to_news(mess.gettext(), mess.get_city(), mess.get_datetime())
                 elif cmd == "2":                                                                                        #condition for addin Advertisements
                     print("2 was selected" + "\n")
-                    print("Enter days count: ")                                                                         #input days count
-                    days_count = digital_input_format()
-                    mess = Advertisement(create_message_input(), days_count)
-                    mess.write_to_file(file_name)                                                                       #using function for writing from class
-                    writing_to_csv1()
-                    writing_to_csv2()
-                elif cmd == "3":                                                                                        #condition for addin vacancy
+                    print("Choose the recording method" + "\n"
+                          + "1 - Recording into the TXT file" + "\n"
+                          + '2 - Recording into the Data Base' + "\n")
+                    cmd = input('Enter the menu item: ')
+                    if cmd == '1':
+                        print("Enter days count: ")                                                                     #input days count
+                        days_count = digital_input_format()
+                        mess = Advertisement(create_message_input(), days_count)
+                        mess.write_to_file(file_name)                                                                   #using function for writing from class
+                        writing_to_csv1()
+                        writing_to_csv2()
+                    else:
+                        print("Enter days count: ")
+                        days_count = digital_input_format()
+                        mess = Advertisement(create_message_input(), days_count)
+                        dbmanager = DBManager(connection_string)
+                        dbmanager.write_to_advertisement(mess.gettext(), str(mess.get_date() + " "
+                                                                             + mess.get_days_count() + " days left"))
+                elif cmd == "3":                                                                                        #condition for adding vacancy
                     print("3 was selected" + "\n")
-                    print("Enter the city: ")                                                                           #input city
-                    city = letter_input_format()
-                    print("Enter the position: ")
-                    position = input()
-                    print('Enter salary: ')
-                    salary = digital_input_format()
-                    mess = Vacancy(create_message_input(), salary, city, position)
-                    mess.write_to_file(file_name)                                                                       #using function for writing from class
-                    writing_to_csv1()
-                    writing_to_csv2()
+                    print("Choose the recording method" + "\n"
+                          + "1 - Recording into the TXT file" + "\n"
+                          + '2 - Recording into the Data Base' + "\n")
+                    cmd = input('Enter the menu item: ')
+                    if cmd == '1':
+                        print("Enter the city: ")                                                                       #input city
+                        city = letter_input_format()
+                        print("Enter the position: ")
+                        position = input()
+                        print('Enter salary: ')
+                        salary = digital_input_format()
+                        mess = Vacancy(create_message_input(), salary, city, position)
+                        mess.write_to_file(file_name)                                                                   #using function for writing from class
+                        writing_to_csv1()
+                        writing_to_csv2()
+                    else:
+                        print("Enter the city: ")                                                                       # input city
+                        city = letter_input_format()
+                        print("Enter the position: ")
+                        position = input()
+                        print('Enter salary: ')
+                        salary = digital_input_format()
+                        mess = Vacancy(create_message_input(), salary, city, position)
+                        dbmanager = DBManager(connection_string)
+                        dbmanager.write_to_vacancy(mess.get_position(), mess.gettext(), str(mess.get_salary() + "$"),
+                                                   mess.get_city(), mess.get_datetime())
+
                 elif cmd == "4":
                     print("4 was selected" + "\n")
                     directory = get_directory()

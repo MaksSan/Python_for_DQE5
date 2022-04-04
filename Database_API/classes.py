@@ -90,47 +90,49 @@ class DBManager:
         self.cur = None
         self.connection_string = connection_string
 
-    def write_to_news(self, text, city, date):
+    def write_to_news(self, text, city, date):                                                                          #function for writing into News data base
         with sqlite3.connect(self.connection_string) as self.conn:
             self.cur = self.conn.cursor()
             print("Connection to SQLite DB successful")
-        news_table = self.cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='news' ''')
+        news_table = self.cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='news' ''') #verification existing table in DB
         if news_table.fetchone()[0] == 1:
             pass
         else:
             self.cur.execute('CREATE TABLE news (type varchar(50), text varchar(250), '
-                             'city varchar(100), date varchar(100))')
+                             'city varchar(100), date varchar(100))')                                                   #creating News table
             print('Table was successfully created.')
-        self.cur.execute(f"INSERT INTO news (type, text, city, date) VALUES ('News', '{text}', '{city}', '{date}')")
+        self.cur.execute(f"INSERT INTO news (type, text, city, date) VALUES ('News', '{text}', '{city}', '{date}')")    #insert data into the table
         self.conn.commit()
 
-    def write_to_advertisement(self, text, actual_until):
+    def write_to_advertisement(self, text, actual_until):                                                               #function for writing into advertisement data base
         with sqlite3.connect(self.connection_string) as self.conn:
             self.cur = self.conn.cursor()
             print("Connection to SQLite DB successful")
-        news_table = self.cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='advertisement' ''')
+        news_table = self.cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' 
+        AND name='advertisement' ''')                                                                                   #verification existing table in DB
         if news_table.fetchone()[0] == 1:
             pass
         else:
             self.cur.execute('CREATE TABLE advertisement (type varchar(50), text varchar(250), '
-                             'actual_until varchar(100))')
+                             'actual_until varchar(100))')                                                              #creating advertisement table
             print('Table was successfully created.')
         self.cur.execute(f"INSERT INTO advertisement (type, text, actual_until) VALUES ('Advertisement', '{text}', "
-                         f"'{actual_until}')")
+                         f"'{actual_until}')")                                                                          #insert data into the table
         self.conn.commit()
 
-    def write_to_vacancy(self, position, text, salary, city, date):
+    def write_to_vacancy(self, position, text, salary, city, date):                                                     #function for writing into Vacancy data base
         with sqlite3.connect(self.connection_string) as self.conn:
             self.cur = self.conn.cursor()
             print("Connection to SQLite DB successful")
-        news_table = self.cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='vacancy' ''')
+        news_table = self.cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' 
+        AND name='vacancy' ''')                                                                                         #verification existing table in DB
         if news_table.fetchone()[0] == 1:
             pass
         else:
             self.cur.execute('CREATE TABLE vacancy (type varchar(50), position varchar(100), text varchar(250), '
-                             'salary varchar(20), city varchar(100), date varchar(100))')
+                             'salary varchar(20), city varchar(100), date varchar(100))')                               #creating vacancy table
             print('Table was successfully created.')
         self.cur.execute(f"INSERT INTO vacancy (type, position, text, salary, city, date) VALUES "
-                         f"('Vacancy', '{position}', '{text}', '{salary}', '{city}', '{date}')")
+                         f"('Vacancy', '{position}', '{text}', '{salary}', '{city}', '{date}')")                        #insert data into the table
         self.conn.commit()
 

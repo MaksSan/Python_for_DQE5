@@ -253,7 +253,7 @@ def input_text():                                                               
                         city = letter_input_format()
                         mess = News(create_message_input(), city)
                         dbmanager = DBManager(connection_string)
-                        dbmanager.write_to_news(mess.gettext(), mess.get_city(), mess.get_datetime())
+                        dbmanager.write_to_news(mess.gettext(), mess.get_city(), mess.get_datetime())                   #adding into News data base
                 elif cmd == "2":                                                                                        #condition for addin Advertisements
                     print("2 was selected" + "\n")
                     print("Choose the recording method" + "\n"
@@ -273,7 +273,7 @@ def input_text():                                                               
                         mess = Advertisement(create_message_input(), days_count)
                         dbmanager = DBManager(connection_string)
                         dbmanager.write_to_advertisement(mess.gettext(), str(mess.get_date() + " "
-                                                                             + mess.get_days_count() + " days left"))
+                                                                             + mess.get_days_count() + " days left"))   #adding into Advertisement data base
                 elif cmd == "3":                                                                                        #condition for adding vacancy
                     print("3 was selected" + "\n")
                     print("Choose the recording method" + "\n"
@@ -301,7 +301,7 @@ def input_text():                                                               
                         mess = Vacancy(create_message_input(), salary, city, position)
                         dbmanager = DBManager(connection_string)
                         dbmanager.write_to_vacancy(mess.get_position(), mess.gettext(), str(mess.get_salary() + "$"),
-                                                   mess.get_city(), mess.get_datetime())
+                                                   mess.get_city(), mess.get_datetime())                                #adding into Vacancy data base
 
                 elif cmd == "4":
                     print("4 was selected" + "\n")

@@ -1,0 +1,27 @@
+{
+  "News": [
+    {
+      "type": "News",
+      "text": "Test text",
+      "city": "Minsk",
+      "date": "28.03.1992"
+    }
+  ],
+  "Advertisement": [
+    {
+      "type": "Advertisement",
+      "text": "Free online training, sharing the secrets on… How TV Media Buyers ",
+      "actual_until": "21/03/2022 30 days left"
+    }
+  ],
+  "Vacancy": [
+    {
+      "type": "Vacancy",
+      "position": "Senior Developer in Python",
+      "experience": "5 years",
+      "salary": "5000$",
+      "city": "London",
+      "date": "20/02/2022 03:58:16"
+    }
+  ]
+}

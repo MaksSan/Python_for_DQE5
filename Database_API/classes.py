@@ -1,4 +1,6 @@
 import datetime
+import pyodbc
+import sqlite3
 
 
 class Message:                                                                                                          #class for using Inheritance
@@ -15,9 +17,13 @@ class News(Message):                                                            
     def __init__(self, text, city):                                                                                     #function for initialization varibels
         super().__init__(text)
         self.city = city
+        self.date_time = datetime.datetime.now()
 
     def get_city(self):                                                                                                 #function for getting the city
         return self.city
+
+    def get_datetime(self):
+        return str(self.date_time.strftime('%d/%m/%Y %H:%M:%S'))
 
     def write_to_file(self, file_name):                                                                                 #function for writing text into the file
         with open(file_name, "a+") as file:                                                                             #open at the end on the file
@@ -72,3 +78,21 @@ class Vacancy(Message):                                                         
                        str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n")                               #write text and date into the file
 
 
+class DBManager:
+    def __init__(self, connection_string):
+        self.cur = None
+        self.connection_string = connection_string
+
+    def write_to_news(self, text, city, date):
+        with sqlite3.connect(self.connection_string) as self.conn:
+            self.cur = self.conn.cursor()
+            print("Connection to SQLite DB successful")
+        news_table = self.cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='news' ''')
+        if news_table.fetchone()[0] == 1:
+            pass
+        else:
+            self.cur.execute('CREATE TABLE news (type varchar(50), text varchar(250), '
+                             'city varchar(100), date varchar(100))')
+            print('Table was successfully created.')
+        self.cur.execute(f"INSERT INTO news (type, text, city, date) VALUES ('News', '{text}', '{city}', '{date}')")
+        self.conn.commit()

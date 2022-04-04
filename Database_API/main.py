@@ -3,11 +3,15 @@ import sys
 import csv
 import json
 import xml.etree.ElementTree as ET
+import pyodbc
 from classes import News
 from classes import Advertisement
 from classes import Vacancy
+from classes import DBManager
 
 file_name = "Processed_file/file.txt"
+connection_string = ('info.db')
+# connection_string = ('DRIVER={SQLite3 ODBC Driver};Direct=True;DATABASE=info.db;String Types = Unicode')
 
 
 def show_menu():                                                                                                        #function for printing menu
@@ -236,9 +240,11 @@ def input_text():                                                               
                     print("Enter the city: ")                                                                           #input city
                     city = letter_input_format()
                     mess = News(create_message_input(), city)
-                    mess.write_to_file(file_name)                                                                       #using function for writing from class
-                    writing_to_csv1()
-                    writing_to_csv2()
+                    dbmanager = DBManager(connection_string)
+                    dbmanager.write_to_news(mess.gettext(), mess.get_city(), mess.get_datetime())
+                    # mess.write_to_file(file_name)                                                                     #using function for writing from class
+                    # writing_to_csv1()
+                    # writing_to_csv2()
                 elif cmd == "2":                                                                                        #condition for addin Advertisements
                     print("2 was selected" + "\n")
                     print("Enter days count: ")                                                                         #input days count
@@ -320,3 +326,4 @@ if __name__ == '__main__':                                                      
     my_file.close()
     show_menu()
     input_text()
+

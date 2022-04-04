@@ -70,5 +70,3 @@ class Vacancy(Message):                                                         
             file.write("Vacancy" + "\n" + "Position: " + self.position + "\n" + self.text + "\n" +
                        "Salary: " + self.get_salary() + "$" + "\n" + self.get_city() + ", " +
                        str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) + "\n")                               #write text and date into the file
-
-
